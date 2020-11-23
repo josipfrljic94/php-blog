@@ -1,3 +1,86 @@
+<?php require_once('include/connection.php'); ?>
+<?php require_once('include/function.php'); ?>
+<?php require_once('include/session.php'); ?>
+<?php $SearchQuerryParametar=$_GET["id"]; ?>
+
+
+<?php 
+ // START  PHP CODE OF COMMENT 
+
+            
+ if(isset($_POST['submit'])){
+   
+    $name=$_POST['name'];
+    $Admin="Josip Frljic";
+    $email=$_POST['email'];
+    $textcomment=$_POST['textcomment'];
+    date_default_timezone_set("Europe/Zagreb");
+    $CurrentTime=time();
+    $rightTime=strftime("%B-%d-%Y %H:%M:%S",$CurrentTime);
+
+    if(empty($name)||empty($email)||empty($textcomment)){
+        $_SESSION["errormassage"]="All fields must be filled"; 
+        RedirectFun("FullPost.php?id=$SearchQuerryParametar");
+        
+    }
+    elseif (strlen($name)<3 || strlen($name)>55){
+        $_SESSION["errormassage"]="Name is to short or to long"; 
+        RedirectFun("FullPost.php?id=6");
+        
+    }
+    elseif (strlen($name)<5 || strlen($name)>55){
+        $_SESSION["errormassage"]="email is to short or to long"; 
+        RedirectFun("FullPost.php?id=$SearchQuerryParametar");
+       
+    }
+    elseif (strlen($textcomment)>99) {
+        $_SESSION["errormassage"]="Name is to short or to long"; 
+        RedirectFun("FullPost.php?id=$SearchQuerryParametar");
+       
+    }
+
+    else{
+        global $dbh;
+        $sql="INSERT INTO comments (name,email,comment,datetime,approvedBy,status,post_id) VALUES(:name,:email,:comment,:datetime,'Pending','OFF',:postid)";
+        
+        $sth=$dbh->prepare($sql);
+        $sth->bindValue(':datetime', $rightTime);  
+        $sth->bindValue(':name', $name);  
+        $sth->bindValue(':email', $email);  
+        $sth->bindValue(':comment', $textcomment); 
+        $sth->bindValue(':postid',$SearchQuerryParametar);  
+        $CheckExecution=$sth->execute(); 
+        if($CheckExecution){
+            $_SESSION["succesmassage"]="Your comment is added";
+        
+            // RedirectFun("FullPost.php?id=6");
+            header("Location:FullPost.php?id={$SearchQuerryParametar}");
+            // var_dump($CheckExecution);
+            // echo  $SearchQuerryParametar;
+        }
+        else{
+            $_SESSION["errormassage"]="Sorry, but something go wrong";
+        }
+    }
+}
+
+
+// END PHP CODE OF COMMENT
+
+
+
+
+?>
+
+
+<!-- FETCHING DATA OF POST -->
+
+
+
+
+<!-- END FETCHING DATA OF POST -->
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,9 +90,12 @@
         <title>Document</title>
     </head>
     <body class="bg-light">
-    <?php require_once('include/connection.php'); ?>
-    <?php require_once('include/function.php'); ?>
-<?php require_once('include/session.php'); ?>
+
+
+
+
+  
+   
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,16 +139,18 @@
     
     </nav>
     <!-- END OF NAVBAR -->
-<?php 
-             echo ErrorMas();
-             echo SuccesMas();
-?>
+    
    
     <div class="container">
     <div class="row">
         <div class="col-lg-8 " >
+        <?php 
+             echo ErrorMas();
+             echo SuccesMas();
+?>
            
         <h1 class=" display-3 font-weight-bold">Welcome to Josip Frljic's Blog</h1>
+
         <?php 
                  global $dbh;
         $idget=$_GET['id'];
@@ -97,9 +185,12 @@
                          $author= $row['author'];
                          $image= $row['image'];
                          $post = $row['post'];
+                 
                     
         ?>
+      
             <div class="card my-2 shadow">
+         
                 <div class="card-head border-2">
                     <h1><?php echo $title; ?></h1>
                    
@@ -119,12 +210,42 @@
                    
             </div>
             </div>
-                 <?php } ?>
+                
+
+                <div class="card">
+                <form  action="FullPost.php?id= <?php echo $SearchQuerryParametar ?>" method="post">
+               
+                <div class="form-group">
+                <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">Name</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" name="name" placeholder="name">
+                    </div>
+                </div>
+                <div class="form-group">
+                <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                        <div class="input-group-text">Email</div>
+                        </div>
+                        <input type="email" required class="form-control" id="email" name="email" placeholder="email" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea name="textcomment" id="textcomment" class="w-100" rows="6"></textarea>
+                </div>
+                <div>
+                    <button class="btn btn-primary m-1" type="submit" name="submit">Submit</button>
+                </div>
+</form>
+
+                </div>
 
     </div>
         <div class="col-lg-4 bg-primary" style="height:50px;">
 
         </div>
+        <?php } ?>
     </div>
 </div>
 <!-- end header -->
