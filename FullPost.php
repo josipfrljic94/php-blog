@@ -213,6 +213,28 @@
                 
 
                 <div class="card">
+                <h1 class="text-warning">Comments</h1>
+                <!-- FETCHING COMMENTS -->
+            <?php 
+            $sql="SELECT * FROM comments WHERE post_id= '$SearchQuerryParametar' ORDER BY id desc";
+            $stmt=$dbh->query($sql);
+            while($row2 = $stmt->fetch()){
+                $ComentaryName= $row2['name'];
+                $Comentarydate= $row2['datetime'];
+               $Comment=$row2['comment'] 
+                ?>
+                <div class="media ml-2">
+                    <div class="media-body">
+                        <h6 class="blockquote "><?php echo $ComentaryName ?></h6>
+                        <p class="text-muted display-6"><?php echo $Comentarydate ?></p>
+                        <p><?php echo $Comment ?></p>
+                    </div>
+                </div>
+            <?php } ?>
+           
+              
+
+                <!-- END FETCHING COMMENTS -->
                 <form  action="FullPost.php?id= <?php echo $SearchQuerryParametar ?>" method="post">
                
                 <div class="form-group">
