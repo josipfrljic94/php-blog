@@ -45,35 +45,37 @@
 
 <div class="container py-2 mb-4">
         <div class="row">
+        <?php 
+echo ErrorMas();
+echo SuccesMas();
+?>
            <div class="col-lg-12 col-sm-12">
                <table class="table table-striped table-dark ">
                    <thead class="thead-light">
                     <tr>
                     <th>#</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Date and Time</th>
                         <th>Author</th>
-                        <th>Banner</th>
+                        <th>Date and Time</th>
                         <th>Comments</th>
-                        <th>Actions</th>
-                        <th>Live Preview</th>
+                        <th>Approved</th>
+                        <th>Remove</th>
+                        <th>Details</th>
+                       
                     </tr>
                     </thead>
                 <?php 
                $rb=1;
                     global $dbh;
-                    $sql="SELECT * FROM post";
+                    $sql="SELECT * FROM comments WHERE status='OFF' ORDER BY id desc" ;
                     $stmt=$dbh->query($sql);
                     while($row = $stmt->fetch()){
                             $Id= $row['id'];
+                            $author=$row['name'];
                             $datetime= $row['datetime'];
-                            $title=$row['title'];
-                            $author=$row['author'];
-                            $category=$row['category'];
-                            $author= $row['author'];
-                            $image= $row['image'];
-                            $post = $row['post'];
+                           $postId=$row['post_id'];
+                            $comment=$row['comment'];
+                            // $action=$row['action'];
+                            // $post = $row['post'];
                             //  $rb++ ;
                 ?>
                         <thead>
@@ -83,19 +85,14 @@
                             
                             
                             <td><?php  
-                                if(strlen($title)>10){
-                                    $title=substr($title,0,10)."...";
+                                if(strlen($author)>10){
+                                    $author=substr($author,0,10)."...";
                                 }
 
                                 
-                            echo $title ?></td>
-                            <td>
-                                
-                            <?php 
-                               if(strlen($category)>10){
-                                    $category= substr($category,0,8)."...";
-                                }
-                            echo $category ?></td>
+                            echo $author ?></td>
+                         
+
                             <td>
                                 
                             <?php 
@@ -103,14 +100,24 @@
                                     $datetime= substr($datetime,0,15);
                                 }
                             echo $datetime ?></td>
-                            <td><?php  echo $author ?></td>
-                            <td> <img class=" " style="width:100px; height:50px;" src="Upload/<?php  echo  $image ?>" alt="<?php  echo  $image ?>"></td>
-                            <td><?php echo "comments" ?></td>
+
                             <td>
-                                <a href="UpdatePost.php?id=<?php echo $Id ?>" class="btn btn-warning">Edit</a>  
-                                <a href="DeletePost.php?id=<?php echo $Id ?>" class="btn btn-danger">Delete</a> 
+                                
+                                <?php 
+                                    if(strlen($comment)>5){
+                                        $comment= substr($comment,0,15);
+                                    }
+                                echo $comment ?></td>
+
+                           
+                          
+                           
+                            <td>
+                                <a href="ApproveComment.php?id=<?php echo $Id ?>" class="btn btn-warning">Approved</a>  
+                              
                             </td>
-                            <td><a href="FullPost.php?id=<?php echo $Id ?>"><span class="btn btn-primary ">Live preview</span></a></td>
+                            <td>  <a href="DeleteComment.php?id=<?php echo $Id ?>" class="btn btn-danger">Delete</a> </td>
+                            <td><a href="FullPost.php?id=<?php echo $postId ?>"><span class="btn btn-primary ">Live preview</span></a></td>
                           
                           
                            

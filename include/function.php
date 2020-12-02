@@ -40,6 +40,23 @@ function findUser($Username,$password){
     }
  
   }
+function protectedLogin(){
+ if (isset($_SESSION['ADMIN_ID'])) {
+  return true;
+ } else {
+  $_SESSION["errormassage"] = "Login required";
+  RedirectFun('Login.php');
+ }
+ 
+}
 
+function TrackingUrl(){
+  if (isset($_SESSION['TrackingUrl'])) {
+   RedirectFun($_SESSION['TrackingUrl']);
+  } else {
+    RedirectFun('index.php');
+  }
+  
+}
 
 ?>

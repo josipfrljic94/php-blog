@@ -10,7 +10,12 @@
     <?php require_once('include/connection.php'); ?>
 <?php require_once('include/function.php'); ?>
 <?php require_once('include/session.php'); ?>
+<?php 
 
+    if(isset( $_SESSION['ADMIN_ID'])){
+        RedirectFun('index.php');
+    }
+?>
 <?php 
     if(isset($_POST['submit'])) {
 
@@ -28,6 +33,8 @@
             $_SESSION['Username']=$FindedUser['username'];
             $_SESSION['aname']=$FindedUser['aname'];
             $_SESSION["succesmassage"]="Welcome ".$_SESSION['aname'];
+
+          TrackingUrl();
            }else{
             $_SESSION["errormassage"] = "User doesn't exist";
                RedirectFun("Login.php");
@@ -38,38 +45,8 @@
 ?>
 
     <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Themes</a>
-          </li>
-        </ul>
-       
-       <ul class="ml-auto navbar-nav ">
-       <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Log out</a>
-          </li>
-          </div>
-       </ul>
-     
-    
-    </nav>
+   <!-- start navbar -->
+   <?php require_once('include/Navbar.php'); ?>
     <!-- END OF NAVBAR -->
 <header>
     <div class="container ">

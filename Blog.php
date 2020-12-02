@@ -8,49 +8,12 @@
     </head>
     <body class="bg-light">
     <?php require_once('include/connection.php'); ?>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="Blog.php">Blog <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Posts.php">Posts</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link " href="addNewPost.php" tabindex="-1" >Add New Post</a>
-          </li>
-        </ul>
-       
-       <ul class="ml-auto navbar-nav ">
-       <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Log out</a>
-          </li>
-          </div>
-       </ul>
-       </ul>
-       <ul>
-        <form action="Blog.php" method="GET" class="form-inline">
-          <div class="form-group ">
 
-              <input type="text" class="form-control" name="search" placeholder="Search...">
-              <button class="btn btn-primary" name="searchbtn" >Search</button>
-          </div>
-          </form>
-       </ul>
-     
     
-    </nav>
+    <!-- start navbar -->
+    <?php require_once('include/Navbar.php'); ?>
     <!-- END OF NAVBAR -->
+
     <div class="container">
     <div class="row">
         <div class="col-lg-8 " >

@@ -2,13 +2,15 @@
 <?php require_once('include/function.php'); ?>
 <?php require_once('include/session.php'); ?>
 
+<?php $_SESSION['TrackingUrl']=$_SERVER['PHP_SELF']; ?>
+<?php protectedLogin() ?>
 <?php 
 
 if(isset($_POST['submit'])){
     $title= $_POST['title'];
   $Category= $_POST['categorytitle'];
-//   $Admin="Josip Frljic";
-$author= $_POST["author"];
+
+$author= $_SESSION['Username'];
   $image= $_FILES['image']['name'];
   $target= "Upload/".basename( $_FILES['image']['name']);
   $post= $_POST['post'];
@@ -25,6 +27,7 @@ elseif(strlen($title)>54 || strlen($post)>999){
   $_SESSION["errormassage"] = "Title can have max 54 characters";
 }
 else{
+  
   $sql="INSERT INTO post(datetime,title,category,author,image,post)";
   $sql.="VALUES (:datetime,:title,:category,:author,:image,:post)";
   $sth= $dbh->prepare($sql);
@@ -37,6 +40,7 @@ else{
   $Execute=$sth->execute();
     move_uploaded_file( $_FILES['image']['tmp_name'],$target);
   if($Execute){
+    
     $_SESSION["succesmassage"]="You upload the new topic";
 
     // header("Location: some.php");
@@ -59,41 +63,11 @@ else{
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="Blog.php">Blog <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Posts.php">Posts</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link " href="addNewPost.php" tabindex="-1" >Add New Post</a>
-          </li>
-        </ul>
-   
-   <ul class="ml-auto navbar-nav ">
-   <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" >Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" >Log out</a>
-      </li>
-      </div>
-   </ul>
- 
+<!-- start navbar -->
+<?php require_once('include/Navbar.php'); ?>
+    <!-- END OF NAVBAR -->
 
-</nav>
-
-
-<!-- END OF NAVBAR -->
 <header>
     <div class="container bg-dark">
         <div class="row">
@@ -137,10 +111,7 @@ echo SuccesMas();
         </select>
       
     </div>
-    <div class="form-group ">
-        <label for="author" class="font-weight-bold text-light" >Author</label>
-        <input type="text" class="form-control " id="author" name="author">
-    </div>
+  
     <div class="form-group  mt-5">
     <div class="custom-file">
     
