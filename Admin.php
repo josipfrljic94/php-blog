@@ -1,17 +1,18 @@
 <?php require_once('include/connection.php'); ?>
 <?php require_once('include/function.php'); ?>
 <?php require_once('include/session.php'); ?>
-<?php 
-$today = date("F j, Y, H:i:s");
-$CurrentTime=  strftime($today);
-echo $CurrentTime;
 
-?>
 
 <?php 
 
 if(isset($_POST['submit'])){
- $Admin="Josip Frljić";
+  // time
+  $today = date("F j, Y, H:i:s");
+  $CurrentTime=  strftime($today);
+  
+
+  // end time
+ $Admin=$_SESSION['Username'];
   $Username=$_POST['username'];
   $AName=$_POST['aname'];
   $password=$_POST['password'];

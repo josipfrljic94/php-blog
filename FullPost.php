@@ -53,10 +53,9 @@
         if($CheckExecution){
             $_SESSION["succesmassage"]="Your comment is added";
         
-            // RedirectFun("FullPost.php?id=6");
+
             header("Location:FullPost.php?id={$SearchQuerryParametar}");
-            // var_dump($CheckExecution);
-            // echo  $SearchQuerryParametar;
+          
         }
         else{
             $_SESSION["errormassage"]="Sorry, but something go wrong";
@@ -93,51 +92,8 @@
 
 
 
-
-  
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="Blog.php">Blog <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Posts.php">Posts</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link " href="addNewPost.php" tabindex="-1" >Add New Post</a>
-          </li>
-        </ul>
-       
-       <ul class="ml-auto navbar-nav ">
-       <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="#" tabindex="-1" >Log out</a>
-          </li>
-          </div>
-       </ul>
-       </ul>
-       <ul>
-        <form action="Blog.php" method="GET" class="form-inline">
-          <div class="form-group ">
-
-              <input type="text" class="form-control" name="search" placeholder="Search...">
-              <button class="btn btn-primary" name="searchbtn" >Search</button>
-          </div>
-          </form>
-       </ul>
-     
-    
-    </nav>
+    <!-- start navbar -->
+<?php require_once('include/Navbar.php'); ?>
     <!-- END OF NAVBAR -->
     
    
@@ -197,7 +153,27 @@
                     <div class="row mx-auto m-0 my-1 p-0">
                       <div class="col-lg-4  text-center "><?php echo $datetime;?></div>
                       <div class="col-lg-4  text-center text-muted">Written by : <?php echo  $author; ?></div>
-                    <div class="col-lg-4 ml-auto "><span class="badge badge-dark text-light badge-block w-100  text-center"><?php echo "comments:5" ;?></span></div>
+                    <div class="col-lg-4 ml-auto "><span class="badge badge-dark text-light badge-block w-100  text-center">
+                    
+                   <!-- FETCHING COMMENTS -->
+                   <?php 
+                        global $dbh;
+                             $sql="SELECT COUNT(*) FROM comments";
+                             $sth=$dbh->query($sql);
+                             $Totalrow=$sth->fetch();
+                             $TotalPost= array_shift($Totalrow);
+
+                             if($TotalPost){
+                                echo "Comments: ". $TotalPost;
+                             }
+                            else{
+                                echo "-";
+                            }
+                        
+                        ?>
+                      <!-- end fetching -->
+                    
+                    </span></div>
                     </div>
                 </div>
                 <div class="card-body p-0">
@@ -213,8 +189,10 @@
                 
 
                 <div class="card">
-                <h1 class="text-warning">Comments</h1>
-                <!-- FETCHING COMMENTS -->
+                <h1 class="text-warning">
+                    Comments
+                </h1>
+              
             <?php 
             $sql="SELECT * FROM comments WHERE post_id= '$SearchQuerryParametar' ORDER BY id desc";
             $stmt=$dbh->query($sql);

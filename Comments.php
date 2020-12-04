@@ -66,7 +66,7 @@ echo SuccesMas();
                 <?php 
                $rb=1;
                     global $dbh;
-                    $sql="SELECT * FROM comments WHERE status='OFF' ORDER BY id desc" ;
+                    $sql="SELECT * FROM comments ORDER BY id desc" ;
                     $stmt=$dbh->query($sql);
                     while($row = $stmt->fetch()){
                             $Id= $row['id'];
@@ -74,9 +74,8 @@ echo SuccesMas();
                             $datetime= $row['datetime'];
                            $postId=$row['post_id'];
                             $comment=$row['comment'];
-                            // $action=$row['action'];
-                            // $post = $row['post'];
-                            //  $rb++ ;
+                            $status=$row['status'];
+                         
                 ?>
                         <thead>
                         <tr>
@@ -97,25 +96,31 @@ echo SuccesMas();
                                 
                             <?php 
                                 if(strlen($datetime)>5){
-                                    $datetime= substr($datetime,0,15);
+                                    $datetime= substr($datetime,0,8);
                                 }
                             echo $datetime ?></td>
 
                             <td>
                                 
                                 <?php 
-                                    if(strlen($comment)>5){
-                                        $comment= substr($comment,0,15);
-                                    }
+                                    // if(strlen($comment)>5){
+                                    //     $comment= substr($comment,0,15);
+                                    // }
                                 echo $comment ?></td>
 
                            
                           
-                           
+                           <?php if($status=="OFF"): ?>
                             <td>
-                                <a href="ApproveComment.php?id=<?php echo $Id ?>" class="btn btn-warning">Approved</a>  
-                              
+                                <a href="ApproveComment.php?id=<?php echo $Id ?>" class="btn btn-info">Approved</a>     
                             </td>
+                            <?php else :?>
+                                <td>
+                                <a href="DisapproveComment.php?id=<?php echo $Id ?>" class="btn btn-warning">Disapproved</a>     
+                            </td>
+                                <?php endif ?>
+
+
                             <td>  <a href="DeleteComment.php?id=<?php echo $Id ?>" class="btn btn-danger">Delete</a> </td>
                             <td><a href="FullPost.php?id=<?php echo $postId ?>"><span class="btn btn-primary ">Live preview</span></a></td>
                           
