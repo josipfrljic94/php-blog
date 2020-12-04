@@ -6,7 +6,7 @@
 <?php 
 $today = date("F j, Y, H:i:s");
 $CurrentTime=  strftime($today);
-echo $CurrentTime;
+
 
 ?>
 
@@ -17,7 +17,7 @@ if(isset($_POST['submit'])){
   $Admin=$_SESSION['Username'];
 if(empty($Category)){
   $_SESSION["errormassage"] = "All fields must be filled";
- RedirectFun('index.php');
+ RedirectFun('Categories.php');
 }
 elseif(strlen($Category)<2){
   $_SESSION["errormassage"] = "Title must have at least three characters";
@@ -36,10 +36,10 @@ else{
 
   if($Execute){
     $_SESSION["succesmassage"]="You upload the new topic";
-    // header("Location: some.html");
+    RedirectFun('Categories.php');
   }else{
     $_SESSION["errormassage"]="Something went wrong";   
-    header("Location: index.php");
+    RedirectFun('Categories.php');
   }
   
 }
@@ -78,7 +78,7 @@ echo SuccesMas();
 <section class="container py-2 mb-4">
     <div class="row" style="min-height:50px">
         <div class="col-lg-8 offset-lg-2  bg-secondary" style="min-height:50px">
-            <form  action="index.php" method="POST">
+            <form  action="Categories.php" method="POST">
     <div class="form-group p-3">
         <label for="categorytitle" class="font-weight-bold text-light" >Input New Category</label>
         <input type="text" class="form-control " id="categorytitle" name="categorytitle">
@@ -95,6 +95,76 @@ echo SuccesMas();
         </div>
     </div>
 </section>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+        <table class="table table-striped table-dark ">
+                   <thead class="thead-light">
+                    <tr>
+                    <th>#</th>
+                        <th>Author</th>
+                        <th>Date and Time</th>
+                        <th>Title</th>
+                       <th>Action</th>
+                       
+                       
+                    </tr>
+                    </thead>
+                <?php 
+               $rb=1;
+                    global $dbh;
+                    $sql="SELECT * FROM category ORDER BY id desc" ;
+                    $stmt=$dbh->query($sql);
+                    while($row = $stmt->fetch()){
+                            $Id= $row['id'];
+                            $author=$row['author'];
+                            $datetime= $row['datetime'];
+                            $title=$row['title'];
+                           
+                         
+                ?>
+                        <thead>
+                        <tr>
+                            <td><?php  echo $rb++ ?></td>
+                    
+                            
+                            
+                            <td><?php  
+                            
+                            echo $author ?></td>
+                         
+
+                            <td>
+                                
+                            <?php 
+                                if(strlen($datetime)>5){
+                                    $datetime= substr($datetime,0,15);
+                                }
+                            echo $datetime ?></td>
+
+                           
+                           
+                          <td><?php echo $title ?></td>
+                    
+
+                            <td>  <a href="DeleteCategory.php?id=<?php echo $Id ?>" class="btn btn-danger">Delete</a> </td>
+                          
+                          
+                          
+                           
+                        </tr>
+                        </tbody>
+                    <?php } ?>
+                   
+                  
+              
+
+               </table>
+        </div>
+    </div>
+</div>
+
 
 <footer>
 <div class="container-fluid">

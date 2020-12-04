@@ -25,22 +25,25 @@
            </div>
            <div class="col-lg-3 mb-2">
 
-            <a href="index.php" class="btn btn-info round-0 shadow btn-block">Add New Category</a>
+            <a href="Categories.php" class="btn btn-info round-0 shadow btn-block">Add New Category</a>
        </div>
             <div class="col-lg-3 mb-2">
 
-                <a href="admin.php" class="btn btn-warning round-0 btn-block">Add New Admin</a>
+                <a href="admindashboard.php" class="btn btn-warning round-0 btn-block">Add New Admin</a>
         </div>
         <div class="col-lg-3 mb-2">
 
-            <a href="addNewPost.php" class="btn btn-success round-0 btn-block">Approved Comments</a>
+            <a href="Comments.php" class="btn btn-success round-0 btn-block">Approved Comments</a>
         </div>
         </div>
     </div>
 </header>
 <!-- end header -->
 <!--  -->
-
+<?php 
+echo ErrorMas();
+echo SuccesMas();
+?>
 <!-- MAIN AREA -->
 
 <div class="container py-2 mb-4">
@@ -104,7 +107,7 @@
                                 }
                             echo $datetime ?></td>
                             <td><?php  echo $author ?></td>
-                            <td> <img class=" " style="width:100px; height:50px;" src="Upload/<?php  echo  $image ?>" alt="<?php  echo  $image ?>"></td>
+                            <td> <img  style="width:100px; height:50px;" src="Upload/<?php  echo  $image ?>" alt="<?php  echo  $image ?>"></td>
                             <td><?php echo "comments" ?></td>
                             <td>
                                 <a href="UpdatePost.php?id=<?php echo $Id ?>" class="btn btn-warning">Edit</a>  

@@ -7,7 +7,7 @@ $getId= $_GET["id"];
 if(isset($_POST['submit'])){
     $title= $_POST['title'];
   $Category= $_POST['categorytitle'];
-//   $Admin="Josip Frljic";
+
 $author= $_POST["author"];
   $image= $_FILES['image']['name'];
   $target= "Upload/".basename( $_FILES['image']['name']);
@@ -16,28 +16,30 @@ $author= $_POST["author"];
 $CurrentTime=  strftime($today);
 if(empty($title)){
   $_SESSION["errormassage"] = "All fields must be filled";
-header("Location:addNewPost.php");
+  RedirectFun('Dashboard.php');
 }
 elseif(strlen($title)<2 ){
   $_SESSION["errormassage"] = "Title must have at least three characters";
+  RedirectFun('Dashboard.php');
 }
 elseif(strlen($title)>54 || strlen($post)>999){
   $_SESSION["errormassage"] = "Title can have max 54 characters";
+  RedirectFun('Dashboard.php');
 }
 else{
   $sql="UPDATE  post SET title='$title',category='$Category', author='$author',image='$image', post='$post' 
   WHERE id='$getId' ";
-//   $sql.="VALUES (:datetime,:title,:category,:author,:image,:post)";
+
   $sth= $dbh->prepare($sql);
   $Execute=$sth->execute();
     move_uploaded_file( $_FILES['image']['tmp_name'],$target);
   if($Execute){
     $_SESSION["succesmassage"]="You upload the new topic";
 
-    // header("Location: some.php");
+    RedirectFun('Blog.php');
   }else{
     $_SESSION["errormassage"]="Something went wrong";   
-   Redirectfun("Blog.php");
+    RedirectFun('Dashboard.php');
   }
   
 }

@@ -13,7 +13,7 @@
 <?php 
 
     if(isset( $_SESSION['ADMIN_ID'])){
-        RedirectFun('index.php');
+        RedirectFun('Dashboard.php');
     }
 ?>
 <?php 
