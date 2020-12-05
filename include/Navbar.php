@@ -10,7 +10,7 @@
   <ul class="navbar-nav mr-auto">
  
           <li class="nav-item active">
-            <a class="nav-link" href="Blog.php">Blog <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="Blog.php?page=1">Blog <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Dashboard.php">Dashboard</a>

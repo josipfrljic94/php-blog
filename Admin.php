@@ -70,46 +70,17 @@ else{
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+  <!-- start navbar -->
+  <?php require_once('include/Navbar.php'); ?>
+    <!-- END OF NAVBAR -->
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="Blog.php">Blog <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Posts.php">Posts</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link " href="addNewPost.php" tabindex="-1" >Add Admin</a>
-          </li>
-        </ul>
-   
-   <ul class="ml-auto navbar-nav ">
-   <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" >Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" >Log out</a>
-      </li>
-      </div>
-   </ul>
- 
-
-</nav>
-<!-- <div class="footer"> -->
 
 <!-- END OF NAVBAR -->
 <header>
     <div class="container bg-dark">
         <div class="row">
             <div class="col col-lg-12">
-                <h1 class="text-center text-white display-4">Menage Categories</h1>
+                <h1 class="text-center text-white display-4">Register</h1>
             </div>
         </div>
     </div>
