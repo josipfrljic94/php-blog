@@ -145,7 +145,7 @@ if(isset($_GET['page'])){
 
                  <?php if($_GET['page']>1): ?>
                        <!-- previous -->
-                       <li class="page-item"><a class="page-link" href="Blog.php?page=<?php echo $_GET['page']-1 ?>">Previous</a></li>
+                       <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $_GET['page']-1 ?>">Previous</a></li>
                        <?php endif; ?>
                     
                         <!-- previous -->
@@ -166,14 +166,14 @@ if(isset($_GET['page'])){
                                     ?>
 
                                   <li class="page-item active disabled" >
-                                    <a class="page-link"  href="Blog.php?page=<?php echo $i ?>">
+                                    <a class="page-link"  href="index.php?page=<?php echo $i ?>">
                                     <?php echo $i ?>
                                     </a>
                                     </li>
                                 <?php else: ?>
                                
                                   <li class="page-item" >
-                                  <a class="page-link"  href="Blog.php?page=<?php echo $i ?>">
+                                  <a class="page-link"  href="index.php?page=<?php echo $i ?>">
                                   <?php echo $i ?>
                                   </a>
                                   </li>
@@ -188,7 +188,7 @@ if(isset($_GET['page'])){
                         ?>
                         <?php if($_GET['page']<$numpage): ?>
                        
-                        <li class="page-item"><a class="page-link" href="Blog.php?page=<?php echo $_GET['page']+1 ?>">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="index.php?page=<?php echo $_GET['page']+1 ?>">Next</a></li>
                         <?php 
                         endif; 
                   
@@ -251,7 +251,7 @@ if(isset($_GET['page'])){
                           
                             ?>
                             
-                            <li class="list-group-item"> <a href="Blog.php?category=<?php echo $title ?>"><?php echo $title ?></a></li>
+                            <li class="list-group-item"> <a href="index.php?category=<?php echo $title ?>"><?php echo $title ?></a></li>
                            
                       
                     <?php } ?>
@@ -304,36 +304,12 @@ if(isset($_GET['page'])){
     <!-- end row -->
 </div>
 
-<footer>
-    <div class="container-fluid">
-        <div class="row  bg-secondary ">
-            <div class=" col col-md-4 col-sm-10 text-white  m-0 p-0">
-                <ul class="text-center  w-100 text-white m-0 p-0" style="list-style:none;">
-                <li ><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Login</a></li>
-                </ul>
-            </div>
-            <div class=" col col-md-4 col-sm-10 text-white  p-0 m-0  ">
-            <ul class="text-center text-white w-100 m-0 p-0" style="list-style:none;">
-                <li><a href="#">Policy</a></li>
-                <li><a href="#">Sponsors</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            </div>
-            <div class="col col-md-4 col-sm-10 text-white m-0 p-0  ">
-                <ul class="text-center text-white w-100 m-0 p-0" style="list-style:none;">
-                <li><a href="#">fa</a></li>
-                <li><a href="#">fa</a></li>
-                <li><a href="#">fa</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="text-center"> All rights reserved</div>
-    </div>
-</footer>
+<!-- footer -->
+<?php 
+require_once('Footer.php');
+?>
 
+<!--  -->
 
 
     

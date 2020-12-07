@@ -10,7 +10,7 @@
   <ul class="navbar-nav mr-auto">
  
           <li class="nav-item active">
-            <a class="nav-link" href="Blog.php?page=1">Blog <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="index.php?page=1">Blog <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Dashboard.php">Dashboard</a>
@@ -36,9 +36,9 @@
    <ul class="navbar-nav ml-auto  ">
 
    <?php
-if ($_SERVER['PHP_SELF']== '/blogapp/Blog.php'):?>
+if ($_SERVER['PHP_SELF']== '/blogapp/index.php'):?>
 <li class="mr-3">
-<form action="Blog.php ">
+<form action="index.php ">
   <div class="form-group">
       <div class=" row">
         <input type="text" name="search" class="input w-50 border-0 rounded-0" placeholder="search post">
