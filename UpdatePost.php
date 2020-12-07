@@ -36,7 +36,7 @@ else{
   if($Execute){
     $_SESSION["succesmassage"]="You upload the new topic";
 
-    RedirectFun('Blog.php');
+    RedirectFun('index.php?page=1');
   }else{
     $_SESSION["errormassage"]="Something went wrong";   
     RedirectFun('Dashboard.php');
@@ -56,39 +56,9 @@ else{
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="Blog.php">Blog <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Posts.php">Posts</a>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link " href="addNewPost.php" tabindex="-1" >Add New Post</a>
-          </li>
-        </ul>
-   
-   <ul class="ml-auto navbar-nav ">
-   <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" >Login</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="#" tabindex="-1" >Log out</a>
-      </li>
-      </div>
-   </ul>
- 
-
-</nav>
-
+ <!-- start navbar -->
+ <?php require_once('include/Navbar.php'); ?>
+    <!-- END OF NAVBAR -->
 
 <!-- END OF NAVBAR -->
 <header>
@@ -185,35 +155,12 @@ echo SuccesMas();
     </div>
 </section>
 
-<footer>
-<div class="container-fluid">
-    <div class="row  bg-secondary ">
-        <div class=" col col-md-4 col-sm-10 text-white  m-0 p-0">
-            <ul class="text-center  w-100 text-white m-0 p-0" style="list-style:none;">
-            <li ><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Login</a></li>
-            </ul>
-        </div>
-        <div class=" col col-md-4 col-sm-10 text-white  p-0 m-0  ">
-        <ul class="text-center text-white w-100 m-0 p-0" style="list-style:none;">
-            <li><a href="#">Policy</a></li>
-            <li><a href="#">Sponsors</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-        </div>
-        <div class="col col-md-4 col-sm-10 text-white m-0 p-0  ">
-            <ul class="text-center text-white w-100 m-0 p-0" style="list-style:none;">
-            <li><a href="#">fa</a></li>
-            <li><a href="#">fa</a></li>
-            <li><a href="#">fa</a></li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="text-center"> All rights reserved</div>
-</div>
-</footer>
+<!-- footer -->
+<?php 
+require_once('Footer.php');
+?>
+
+<!--  -->
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
